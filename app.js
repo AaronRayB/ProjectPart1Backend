@@ -10,7 +10,7 @@ const User = require('./models/user'); // Ensure the User model is configured pr
 const connectDB = require('./config/db');
 const taskRoutes = require('./router/taskRoutes');
 require('dotenv').config();
-
+const cors = require('cors');
 const app = express();
 
 // Connect to Database
@@ -132,6 +132,14 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error', { message: err.message, error: err });
 });
+
+app.use(express.json());
+app.use(cors({
+  origin: 'projectpart2frontend-gfsmfmcat-aaronraybs-projects.vercel.app',  // Allow front-end to access this API
+  credentials: true,
+
+
+
 
 // Start Server
 const PORT = process.env.PORT || 5000;
